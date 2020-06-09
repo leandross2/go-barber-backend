@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "run": "pm2 start server.js",
     "build": "tsc",
     "dev:server": "ts-node-dev --inspect --transpileOnly --ignore-watch node=_modules src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
