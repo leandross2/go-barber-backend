@@ -16,6 +16,13 @@ class Appointment {
   id: string;
 
   @Column('uuid')
+  user_id: string;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
+
+  @Column('uuid')
   provider_id: string;
 
   @ManyToOne(() => User)

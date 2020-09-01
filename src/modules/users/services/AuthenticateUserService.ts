@@ -25,7 +25,7 @@ class AuthenticateUserService {
   constructor(
     @inject('UsersRepository') private userRepository: IUsersRepository,
 
-    @inject('hashProvider')
+    @inject('HashProvider')
     private hashProvider: IHashProvider
   ) {
     this.userRepository = userRepository;

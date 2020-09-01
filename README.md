@@ -16,6 +16,7 @@
 
 - O Link enviado por emial para resetar senha, deve expirar em 2 horas
 - O usuario precisa confirmar a nova senha ao retar sua senha
+- Identificar o usuário
 
 # Atualização do perfil
 
