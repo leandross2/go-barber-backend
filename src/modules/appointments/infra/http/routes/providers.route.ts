@@ -3,7 +3,7 @@ import { Router } from 'express';
 import ensureAuthenticated from '@modules/users/infra/http/middlwares/ensureAuthenticated';
 import ProvidersController from '@modules/appointments/infra/http/controllers/ProvidersController';
 import ProviderMonthAvailabilitycontroller from '@modules/appointments/infra/http/controllers/ProviderMonthAvailabilityController';
-import ProviderDayAvailabilitycontroller from '@modules/appointments/infra/http/controllers/ProviderDayAvailabilitycontroller';
+import ProviderDayAvailabilitycontroller from '@modules/appointments/infra/http/controllers/ProviderDayAvailabilityController';
 
 const appointmentsRouter = Router();
 const providersController = new ProvidersController();
