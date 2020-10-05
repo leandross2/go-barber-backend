@@ -1,10 +1,13 @@
 import AppError from '@shared/errors/AppError';
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import FakeHashProvider from '../providers/HashProvider/fakes/fakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
+
 import CreateUserService from './CreateUserService';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeHashProvider: FakeHashProvider;
+let fakecacheProvider: FakeCacheProvider;
 let createUserService: CreateUserService;
 
 describe('CreateaUser', () => {
@@ -13,7 +16,8 @@ describe('CreateaUser', () => {
     fakeHashProvider = new FakeHashProvider();
     createUserService = new CreateUserService(
       fakeUsersRepository,
-      fakeHashProvider
+      fakeHashProvider,
+      fakecacheProvider
     );
   });
 
@@ -26,6 +30,7 @@ describe('CreateaUser', () => {
 
     expect(user).toHaveProperty('id');
   });
+
   it('should not be able to create a new user with same email frmo another', async () => {
     await createUserService.execute({
       name: 'manolo',

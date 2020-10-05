@@ -1,8 +1,11 @@
-import 'express-async-errors';
 import 'reflect-metadata';
+import 'dotenv/config';
+import 'express-async-errors';
+import listEndpoints from 'express-list-endpoints';
 
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+import { errors } from 'celebrate';
 
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
@@ -16,10 +19,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.uploadsFolder));
-app.get('/', (request: Request, response: Response) => {
-  response.json({ sucesso: true });
-});
+
 app.use(routes);
+
+app.use(errors());
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {
@@ -36,6 +39,9 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   });
 });
 
+app.get('/', (request: Request, response: Response) => {
+  response.json(listEndpoints(app));
+});
 app.listen(3333, () => {
   console.log('🚀 rodando em http://localhost:3333');
 });

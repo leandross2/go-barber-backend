@@ -5,6 +5,7 @@ import AppError from '@shared/errors/AppError';
 import User from '@modules/users/infra/typeorm/entities/User';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 
 interface IRequestDTO {
@@ -19,7 +20,10 @@ class CreateUserService {
     @inject('UsersRepository') private userRepository: IUsersRepository,
 
     @inject('HashProvider')
-    private hashProvider: IHashProvider
+    private hashProvider: IHashProvider,
+
+    @inject('CacheProvider')
+    private CacheProvider: ICacheProvider
   ) {
     this.userRepository = userRepository;
   }
@@ -38,8 +42,8 @@ class CreateUserService {
       email,
       password: hashedPassword,
     });
-
-    await this.userRepository.save(user);
+    console.log(await this.CacheProvider);
+    await this.CacheProvider.invalidatePrefix('providers-list');
 
     return user;
   }
