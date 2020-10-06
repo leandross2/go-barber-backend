@@ -38,8 +38,6 @@ export default class ListProviderAppointmentsService {
         { provider_id, month, year, day }
       );
 
-      console.log('busco do banco heim!!!');
-
       await this.CacheProvider.save(cacheKey, appointments);
     }
 

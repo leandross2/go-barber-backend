@@ -32,8 +32,6 @@ export default class ListProvidersService {
         except_user_id: user_id,
       });
 
-      console.log('rodo a query');
-
       await this.CacheProvider.save(`providers-list:${user_id}`, users);
     }
 

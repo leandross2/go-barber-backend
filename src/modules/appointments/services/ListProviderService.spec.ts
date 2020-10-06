@@ -12,6 +12,7 @@ let listProviders: ListProviderService;
 describe('UpdateProfileAvatar', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
+    fakeCacheProvider = new FakeCacheProvider();
     listProviders = new ListProviderService(
       fakeUsersRepository,
       fakeCacheProvider

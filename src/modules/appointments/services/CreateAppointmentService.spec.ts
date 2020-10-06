@@ -10,12 +10,12 @@ let fakeAppointmentRepository: FakeAppointmentRepository;
 let fakeNotificationRepository: FakeNotificationsRepository;
 let fakeCacheProvider: FakeCacheProvider;
 let createAppointmentService: CreateAppointmentService;
-describe('CreateaAppointment', () => {
+describe('CreateAppointment', () => {
   beforeEach(() => {
     fakeAppointmentRepository = new FakeAppointmentRepository();
 
     fakeNotificationRepository = new FakeNotificationsRepository();
-
+    fakeCacheProvider = new FakeCacheProvider();
     createAppointmentService = new CreateAppointmentService(
       fakeAppointmentRepository,
       fakeNotificationRepository,
