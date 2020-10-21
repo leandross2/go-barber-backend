@@ -1,0 +1,44 @@
+version: '3.1'
+services:
+  app:
+    working_dir: '/app'
+    container_name: app_gobarber
+    image: node:alpine
+    networks: 
+      - 'network_gobarber'
+    ports: 
+      - '3333:3333'
+    volumes:
+      - .:/app
+    command: echo install dependences
+    command: yarn
+    command: ls
+      
+      
+  postgres:
+    container_name: postgres_gobarber
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: docker
+   
+    networks: 
+      - 'network_gobarber'
+    ports: 
+      - '5432:5432'
+  redis:
+    container_name: redis_gobarber
+    image: redis:alpine
+    ports: 
+      - '6379:6379'
+    networks: 
+      - 'network_gobarber'
+  mongo:
+    container_name: mongo_gobarber
+    image: mongo
+    ports: 
+      - '27017:27017'
+    networks: 
+      - 'network_gobarber'
+networks: 
+  network_gobarber:
+    driver: bridge
