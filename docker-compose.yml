@@ -12,7 +12,7 @@ services:
       - .:/app
     command: echo install dependences
     command: yarn
-    command: ls
+    command: yarn dev:server
       
       
   postgres:
