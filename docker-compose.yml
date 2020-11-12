@@ -2,18 +2,19 @@ version: '3.1'
 services:
   app:
     working_dir: '/app'
+    env_file: .env
     container_name: app_gobarber
     image: node:12
-    ports: 
+    ports:
       - '3333:3333'
-    volumes:
-      - .:/app
     command: yarn
     command: yarn typeorm migration:run
     command: yarn dev:server
-    networks: 
+    volumes:
+      - .:/app
+    networks:
       - 'network_gobarber'
-    depends_on: 
+    depends_on:
       - postgres
       - mongo
       - redis
@@ -22,28 +23,36 @@ services:
     container_name: postgres_gobarber
     image: postgres
     environment:
-      POSTGRES_PASSWORD: docker
-    networks: 
+       POSTGRES_DB: ${POSTGRES_DB}
+       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+        - .postgres:/var/lib/postgres/data
+    networks:
       - 'network_gobarber'
-    ports: 
+    ports:
       - '5432:5432'
-
-  redis:
-    container_name: redis_gobarber
-    image: redis:alpine
-    ports: 
-      - '6379:6379'
-    networks: 
-      - 'network_gobarber'
 
   mongo:
     container_name: mongo_gobarber
     image: mongo
-    ports: 
+    ports:
       - '27017:27017'
-    networks: 
+    volumes:
+    - .mongo:/var/lib/mongo/data
+    networks:
+      - 'network_gobarber'
+
+  redis:
+    container_name: redis_gobarber
+    image: redis:alpine
+    ports:
+      - '6379:6379'
+    volumes:
+      - .redis:/var/lib/mongo/redis
+    networks:
       - 'network_gobarber'
 
 networks: 
   network_gobarber:
     driver: bridge
+
