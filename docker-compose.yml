@@ -3,7 +3,7 @@ services:
   app:
     working_dir: '/app'
     env_file: .env
-    container_name: app_gobarber
+    container_name: app_${APP_NAME}
     image: node:12
     ports:
       - '3333:3333'
@@ -13,46 +13,46 @@ services:
     volumes:
       - .:/app
     networks:
-      - 'network_gobarber'
+      - 'network_${APP_NAME}'
     depends_on:
       - postgres
       - mongo
       - redis
 
   postgres:
-    container_name: postgres_gobarber
+    container_name: postgres_${APP_NAME}
     image: postgres
     environment:
-       POSTGRES_DB: ${POSTGRES_DB}
+       POSTGRES_DB: ${APP_NAME}
        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
         - .postgres:/var/lib/postgres/data
     networks:
-      - 'network_gobarber'
+      - 'network_${APP_NAME}'
     ports:
       - '5432:5432'
 
   mongo:
-    container_name: mongo_gobarber
+    container_name: mongo_${APP_NAME}
     image: mongo
     ports:
       - '27017:27017'
     volumes:
     - .mongo:/var/lib/mongo/data
     networks:
-      - 'network_gobarber'
+      - 'network_${APP_NAME}'
 
   redis:
-    container_name: redis_gobarber
+    container_name: redis_${APP_NAME}
     image: redis:alpine
     ports:
       - '6379:6379'
     volumes:
       - .redis:/var/lib/mongo/redis
     networks:
-      - 'network_gobarber'
+      - 'network_${APP_NAME}'
 
 networks: 
-  network_gobarber:
+  network_${APP_NAME}:
     driver: bridge
 

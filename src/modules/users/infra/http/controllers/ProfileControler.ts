@@ -33,4 +33,8 @@ export default class ProfileController {
 
     return response.json({ user: classToClass(user) });
   }
+
+  public async teste(request: Request, response: Response): Promise<Response> {
+    return response.json({ sucess: true });
+  }
 }
